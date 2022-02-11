@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="weatherAccent">#84ceca</color>
+
+    <color name="gradientPeriodicInit_c1">#EFEFEF</color>
+    <color name="gradientPeriodicInit_c2">#F7F6F6</color>
+    <color name="gradientPeriodicInit_c3">#FFFFFF</color>
+
+    <array name="gradientInit">
+        <item>@color/gradientPeriodicInit_c1</item>
+        <item>@color/gradientPeriodicInit_c2</item>
+        <item>@color/gradientPeriodicInit_c3</item>
+    </array>
+
+    <color name="gradientPeriodicClouds_c1">#3453d1</color>
+    <color name="gradientPeriodicClouds_c2">#6d69ff</color>
+    <color name="gradientPeriodicClouds_c3">#cd47c6</color>
+
+    <array name="gradientPeriodicClouds">
+        <item>@color/gradientPeriodicClouds_c1</item>
+        <item>@color/gradientPeriodicClouds_c2</item>
+        <item>@color/gradientPeriodicClouds_c3</item>
+    </array>
+
+    <color name="gradientCloudy_c1">#62bff5</color>
+    <color name="gradientCloudy_c2">#61b3e5</color>
+    <color name="gradientCloudy_c3">#5d8fb2</color>
+
+    <array name="gradientCloudy">
+        <item>@color/gradientCloudy_c1</item>
+        <item>@color/gradientCloudy_c2</item>
+        <item>@color/gradientCloudy_c3</item>
+    </array>
+
+    <color name="gradientMostlyCloudy_c1">#51bbf5</color>
+    <color name="gradientMostlyCloudy_c2">#71c3ee</color>
+    <color name="gradientMostlyCloudy_c3">#f3e5d2</color>
+
+    <array name="gradientMostlyCloudy">
+        <item>@color/gradientMostlyCloudy_c1</item>
+        <item>@color/gradientMostlyCloudy_c2</item>
+        <item>@color/gradientMostlyCloudy_c3</item>
+    </array>
+
+    <color name="gradientPartlyCloudy_c1">#5b64be</color>
+    <color name="gradientPartlyCloudy_c2">#6084df</color>
+    <color name="gradientPartlyCloudy_c3">#64a2ff</color>
+
+    <array name="gradientPartlyCloudy">
+        <item>@color/gradientPartlyCloudy_c1</item>
+        <item>@color/gradientPartlyCloudy_c2</item>
+        <item>@color/gradientPartlyCloudy_c3</item>
+    </array>
+
+    <color name="gradientClear_c1">#6d4fbe</color>
+    <color name="gradientClear_c2">#6c56be</color>
+    <color name="gradientClear_c3">#a189f1</color>
+
+    <array name="gradientClear">
+        <item>@color/gradientClear_c1</item>
+        <item>@color/gradientClear_c2</item>
+        <item>@color/gradientClear_c3</item>
+    </array>
+
+    <color name="gradientSnow_c1">#009900</color>
+    <color name="gradientSnow_c2">#00cc66</color>
+    <color name="gradientSnow_c3">#1aff8c</color>
+
+    <array name="gradientSnow">
+        <item>@color/gradientSnow_c1</item>
+        <item>@color/gradientSnow_c2</item>
+        <item>@color/gradientSnow_c3</item>
+    </array>
+
+    <color name="gradientSleet_c1">#ff9900</color>
+    <color name="gradientSleet_c2">#ffcc00</color>
+    <color name="gradientSleet_c3">#ffeb99</color>
+
+    <array name="gradientSleet">
+        <item>@color/gradientSleet_c1</item>
+        <item>@color/gradientSleet_c2</item>
+        <item>@color/gradientSleet_c3</item>
+    </array>
+
+    <color name="gradientHail_c1">#cc0099</color>
+    <color name="gradientHail_c2">#d65cad</color>
+    <color name="gradientHail_c3">#f0c2e0</color>
+
+    <array name="gradientHail">
+        <item>@color/gradientHail_c1</item>
+        <item>@color/gradientHail_c2</item>
+        <item>@color/gradientHail_c3</item>
+    </array>
+
+    <color name="gradientThunder_c1">#3333ff</color>
+    <color name="gradientThunder_c2">#3366ff</color>
+    <color name="gradientThunder_c3">#ccd9ff</color>
+
+    <array name="gradientThunder">
+        <item>@color/gradientThunder_c1</item>
+        <item>@color/gradientThunder_c2</item>
+        <item>@color/gradientThunder_c3</item>
+    </array>
+
+    <color name="gradientHeavyRain_c1">#262626</color>
+    <color name="gradientHeavyRain_c2">#a6a6a6</color>
+    <color name="gradientHeavyRain_c3">#cccccc</color>
+
+    <array name="gradientHeavyRain">
+        <item>@color/gradientHeavyRain_c1</item>
+        <item>@color/gradientHeavyRain_c2</item>
+        <item>@color/gradientHeavyRain_c3</item>
+    </array>
+
+
+    <color name="grayIconTint">#727272</color>
+
+</resources>
