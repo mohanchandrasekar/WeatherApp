@@ -4,6 +4,7 @@ import com.mohan.weatherapp.BuildConfig
 import com.mohan.weatherapp.repository.ApiProvider
 import com.mohan.weatherapp.data.Location
 import com.mohan.weatherapp.data.WeatherInfo
+import com.mohan.weatherapp.utils.MockData
 import io.reactivex.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -36,7 +37,7 @@ class WeatherDataManager(
             }
             .doOnError {
                 Timber.e(" Unable to get the Location data from api %s", it.message)
-            }
+            }.onErrorReturnItem(MockData.mockWeatherInfo())
     }
 
     private fun weatherInfo(woeid: Int, tomorrowDate: String): Single<WeatherInfo> {
