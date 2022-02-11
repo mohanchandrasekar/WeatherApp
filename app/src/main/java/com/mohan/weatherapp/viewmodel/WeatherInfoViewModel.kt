@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mohan.weatherapp.data.Forecast
 import com.mohan.weatherapp.data.WeatherInfo
-import com.mohan.weatherapp.data.manager.WeatherDataManager
+import com.mohan.weatherapp.manager.WeatherDataManager
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -17,28 +17,30 @@ import kotlin.math.roundToInt
 class WeatherInfoViewModel(private val weatherDataManager: WeatherDataManager) : ViewModel() {
 
     private var compositeDisposable = CompositeDisposable()
-    private var forecasts: MutableList<Forecast> = mutableListOf()
-    private val _weatherInfo = MutableLiveData<MutableList<Forecast>>()
-    val weatherInfoLiveData: LiveData<MutableList<Forecast>> = _weatherInfo
+    private val _weatherInfo = MutableLiveData<Forecast>()
+    val weatherInfoLiveData: LiveData<Forecast> = _weatherInfo
 
     fun locationSearch(query: String): Disposable {
         return getWeatherInfo(query)
             .doOnSuccess {
-                forecasts.add(
-                    Forecast(
-                        it.the_temp.roundToInt(),
-                        it.min_temp.roundToInt(),
-                        it.max_temp.roundToInt(),
-                        it.weatherUrl,
-                        it.weather_state_name,
-                        it.humidity,
-                        it.wind_speed.roundToInt(),
-                    )
-                )
-                _weatherInfo.postValue(forecasts)
+               toMapForecast(it).also {
+                   _weatherInfo.postValue(it)
+               }
             }
             .subscribeBy(onError = ::logError)
             .addTo(compositeDisposable)
+    }
+
+    private fun toMapForecast(weatherInfo: WeatherInfo): Forecast {
+        return Forecast(
+            weatherInfo.the_temp.roundToInt(),
+            weatherInfo.min_temp.roundToInt(),
+            weatherInfo.max_temp.roundToInt(),
+            weatherInfo.weatherUrl,
+            weatherInfo.weather_state_name,
+            weatherInfo.humidity,
+            weatherInfo.wind_speed.roundToInt(),
+        )
     }
 
     private fun getWeatherInfo(query: String): Single<WeatherInfo> {

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="weather_min_max_temp_size">18sp</dimen>
+    <dimen name="weather_text_view_description">30sp</dimen>
+</resources>

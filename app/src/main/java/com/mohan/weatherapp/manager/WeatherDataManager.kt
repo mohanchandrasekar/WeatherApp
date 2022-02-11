@@ -1,4 +1,4 @@
-package com.mohan.weatherapp.data.manager
+package com.mohan.weatherapp.manager
 
 import com.mohan.weatherapp.BuildConfig
 import com.mohan.weatherapp.repository.ApiProvider

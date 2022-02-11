@@ -40,11 +40,11 @@ class WeatherActivity : AppCompatActivity(),
     private lateinit var countryInfo: List<Country>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_weather)
         job = Job()
         countryInfo = CountryInfo.countryInfo()
         setUpUI(countryInfo)
-
     }
 
     private fun setUpUI(countryInfo: List<Country>) {
@@ -56,7 +56,7 @@ class WeatherActivity : AppCompatActivity(),
         cityPicker.adapter = ForecastAdapter(countryInfo)
         cityPicker.addOnItemChangedListener(this)
         cityPicker.addScrollStateChangeListener(this)
-        cityPicker.scrollToPosition(0)
+        cityPicker.scrollToPosition(DEFAULT_POSITION)
         cityPicker.setItemTransformer(
             ScaleTransformer.Builder()
                 .setMinScale(0.8f)
@@ -64,47 +64,51 @@ class WeatherActivity : AppCompatActivity(),
         )
     }
 
-    private fun weatherInfoObserver(position: Int) {
-        weatherInfoViewModel.weatherInfoLiveData.observe(this, {
-            forecasts = it
-            setUpForecastView(position)
-            Timber.d("forecasts info  :::: $forecasts")
-            Timber.d("forecasts size :::: ${forecasts.size}")
-        })
-    }
-
-    private fun setUpForecastView(position: Int) {
-        forecastView.setForecast(forecasts[position])
-    }
-
     override fun onCurrentItemChanged(holder: ForecastAdapter.ViewHolder?, position: Int) {
+        forecasts.clear()
         if (holder != null) {
             progressBar.visibility = View.VISIBLE
-            val cityName = countryInfo[position].cityName
-            networkHelper.hasInternet {
-                if (it){
-                    weatherInfoViewModel.locationSearch(cityName)
-                    runOnUiThread {
-                        updateForecastView(position)
-                    }
-                }else{
-                    val snackbar = Snackbar
-                        .make(parentLayout, "No Internet Connection", Snackbar.LENGTH_LONG)
-                    snackbar.show()
-                }
-            }
+            weatherApiCall(position)
             holder.showText()
         }
     }
 
-    private fun updateForecastView(position: Int){
+    private fun weatherApiCall(position: Int) {
+        val cityName = countryInfo[position].cityName
+        networkHelper.hasInternet { isNetworkAvailable ->
+            if (isNetworkAvailable){
+                weatherInfoViewModel.locationSearch(cityName)
+                runOnUiThread {
+                    updateForecastView()
+                }
+            }else{
+                Snackbar
+                    .make(parentLayout, "No Internet Connection", Snackbar.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun updateForecastView(){
         launch {
             withContext(Dispatchers.Main) {
                 delay(1000)
-                weatherInfoObserver(position)
+                weatherInfoObserver()
             }
         }
         progressBar.visibility = View.GONE
+    }
+
+    private fun weatherInfoObserver() {
+        weatherInfoViewModel.weatherInfoLiveData.observe(this, {
+            Timber.d("ForeCast data from api:  $it")
+            forecasts.add(it).also {
+                setUpForecastView()
+            }
+        })
+    }
+
+    private fun setUpForecastView() {
+        forecastView.setForecast(forecasts[DEFAULT_POSITION])
     }
 
     override fun onScrollStart(holder: ForecastAdapter.ViewHolder, position: Int) {
@@ -119,8 +123,8 @@ class WeatherActivity : AppCompatActivity(),
     ) {
         val current = countryInfo[currentIndex]
         val adapter = cityPicker.adapter
-        val itemCount = adapter?.itemCount ?: 0
-        if (newIndex in 0 until itemCount) {
+        val itemCount = adapter?.itemCount ?: DEFAULT_POSITION
+        if (newIndex in DEFAULT_POSITION until itemCount) {
             val next = countryInfo[newIndex]
             forecastView.onScroll(1f - Math.abs(position), current, next)
         }
@@ -135,5 +139,9 @@ class WeatherActivity : AppCompatActivity(),
     override fun onScrollEnd(holder: ForecastAdapter.ViewHolder, position: Int) {}
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + job
+
+    companion object{
+        private const val DEFAULT_POSITION = 0
+    }
 
 }

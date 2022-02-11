@@ -72,7 +72,7 @@ class ForecastView : LinearLayout {
         weatherTemperature!!.text = forecast.temperature + "\u2103"
         weatherMinTemp!!.text = "MinTemp: "+forecast.minTemp +"\u2103"
         weatherMaxTemp!!.text = "MaxTemp: "+forecast.maxTemp +"\u2103"
-        weatherTomorrow!!.text = "Tomorrow"
+        weatherTomorrow!!.text = "Tomorrow's Weather"
         weatherHumidity!!.text = "Humidity: "+forecast.humidity +"%"
         weatherWind!!.text = "Wind Speed: "+forecast.wind_speed +" m/s"
         Glide.with(context).load(forecast.weatherUrl).into(weatherImage!!)

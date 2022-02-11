@@ -1,62 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/weather_tomorrow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="sans-serif-light"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            tools:text="Tomorrow " />
-
-        <ImageView
-            android:id="@+id/weather_image"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:layout_marginTop="100dp"
-            android:scaleType="centerInside"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/partly_cloudy" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/weather_tomorrow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|top">
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tomorrow's Weather" />
 
-        <TextView
-            android:id="@+id/weather_temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@android:color/white"
-            android:textSize="74sp"
-            tools:text="9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="14dp"
-            android:fontFamily="sans-serif-light"
-            android:gravity="top"
-            android:textColor="@android:color/white"
-            android:textSize="32sp"
-            tools:text="°C" />
-    </LinearLayout>
-
-    <Space
+    <ImageView
+        android:id="@+id/weather_image"
         android:layout_width="wrap_content"
-        android:layout_height="5dp" />
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="@+id/weather_tomorrow"
+        app:layout_constraintStart_toStartOf="@+id/weather_tomorrow"
+        app:layout_constraintTop_toBottomOf="@id/weather_tomorrow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/weather_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/white"
+        android:textSize="74sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weather_image"
+        tools:text="9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="152dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="top"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/weather_text_view_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/weather_temperature"
+        app:layout_constraintTop_toBottomOf="@+id/weather_image"
+        tools:text="°C" />
 
     <TextView
         android:id="@+id/weather_description"
@@ -64,22 +63,20 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="@dimen/weather_text_view_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weather_temperature"
         tools:text="Mostly Cloudy" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="10dp" />
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:weightSum="2">
+        android:layout_margin="20dp"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weather_description">
 
         <TextView
             android:id="@+id/weather_mintemp"
@@ -89,7 +86,7 @@
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="21sp"
+            android:textSize="@dimen/weather_min_max_temp_size"
             tools:text="MinTemp" />
 
         <TextView
@@ -100,15 +97,19 @@
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="21sp"
+            android:textSize="@dimen/weather_min_max_temp_size"
             tools:text="Humidity" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:weightSum="2">
+        android:layout_margin="10dp"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
             android:id="@+id/weather_maxtemp"
@@ -118,7 +119,7 @@
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="21sp"
+            android:textSize="@dimen/weather_min_max_temp_size"
             tools:text="MaxTemp" />
 
         <TextView
@@ -129,8 +130,10 @@
             android:fontFamily="sans-serif-light"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="21sp"
+            android:textSize="@dimen/weather_min_max_temp_size"
             tools:text="Wind" />
     </LinearLayout>
 
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
